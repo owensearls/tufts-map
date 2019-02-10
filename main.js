@@ -1,11 +1,8 @@
 function color(owner) {
-  if (owner == null) {
-    return "none"
-  }
-  else if (owner.search('TUFTS') != -1) {
-    return "blue"
-  } else if (owner.search('WALNUT') != -1) {
-    return "red"
+  if (/TUFTS/i.test(owner)) {
+    return "#417dc1"
+  } else if (/WALNUT/i.test(owner)) {
+    return "#F03A47"
   } else {
     return "none"
   }
@@ -17,7 +14,7 @@ var width = 700,
 var svg = d3.select("div#map").append("svg")
             .attr("width", "100%")
             .attr("height", "100%")
-            .attr('viewBox', `0 0 700 700`)
+            .attr('viewBox', `0 0 ${height} ${width}`)
             .attr('preserveAspectRatio', 'xMinYMid');
 
 var projection = d3.geoAlbers()
