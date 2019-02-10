@@ -8,8 +8,8 @@ function color(owner) {
   }
 }
 
-var width = 700,
-    height = 700;
+var width = 1000,
+    height = 1000;
 
 var svg = d3.select("div#map").append("svg")
             .attr("width", "100%")
@@ -18,9 +18,9 @@ var svg = d3.select("div#map").append("svg")
             .attr('preserveAspectRatio', 'xMinYMid');
 
 var projection = d3.geoAlbers()
-    .rotate([71.118,0])
+    .rotate([71.12,0])
     .center([0, 42.406])
-    .scale(2700000)
+    .scale(4200000)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
@@ -32,10 +32,10 @@ Promise.all([
 ]).then(render);
 
 function render(data) {
-  let test = data.map(x => x.features)
+  map = [].concat.apply([], data.map(x => x.features))
   svg.append("g")
     .selectAll("path")
-    .data([].concat.apply([], data.map(x => x.features)))
+    .data(map)
     .enter().append("path")
       .attr("stroke", "black")
       .attr("fill", function (d) {return color(d.properties.OWNER1)})
