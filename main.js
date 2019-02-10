@@ -1,4 +1,5 @@
 function color(owner) {
+  console.log(owner)
   if (/TUFTS/i.test(owner)) {
     return "#417dc1"
   } else if (/WALNUT/i.test(owner)) {
@@ -27,12 +28,13 @@ var path = d3.geoPath()
     .projection(projection);
 
 Promise.all([
-  d3.json("data/tufts-medford.geojson"),
-  d3.json("data/tufts-somerville.geojson"),
+  d3.json("data/2019/tufts-medford.json"),
+  d3.json("data/2019/tufts-somerville.json"),
 ]).then(render);
 
 function render(data) {
-  map = [].concat.apply([], data.map(x => x.features))
+  map = [].concat.apply([], data.map(x => x.features));
+  console.log(map.map(x => x.properties));
   svg.append("g")
     .selectAll("path")
     .data(map)
