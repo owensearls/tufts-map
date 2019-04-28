@@ -40,4 +40,9 @@ function render(data) {
       .attr("stroke", "black")
       .attr("fill", function (d) {return color(d.properties.OWNER1)})
       .attr("d", path);
+
+  console.log(map
+    .filter(x => color(x.properties.OWNER1) != "none")
+    .map(x => (x.properties.TOTAL_VAL))
+    .reduce((x, y) => x + y));
 }
