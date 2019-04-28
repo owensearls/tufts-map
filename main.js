@@ -1,5 +1,4 @@
 function color(owner) {
-  console.log(owner)
   if (/TUFTS/i.test(owner)) {
     return "#417dc1"
   } else if (/WALNUT/i.test(owner)) {
@@ -9,19 +8,19 @@ function color(owner) {
   }
 }
 
-var width = 1000,
-    height = 1000;
+var height = 1000,
+    width = 2000;
 
 var svg = d3.select("div#map").append("svg")
             .attr("width", "100%")
             .attr("height", "100%")
-            .attr('viewBox', `0 0 ${height} ${width}`)
+            .attr('viewBox', `0 0 ${width} ${height}`)
             .attr('preserveAspectRatio', 'xMinYMid');
 
 var projection = d3.geoAlbers()
-    .rotate([71.12,0])
-    .center([0, 42.406])
-    .scale(4200000)
+    .rotate([71.117,0])
+    .center([0, 42.4067])
+    .scale(5700000)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
@@ -34,7 +33,6 @@ Promise.all([
 
 function render(data) {
   map = [].concat.apply([], data.map(x => x.features));
-  console.log(map.map(x => x.properties));
   svg.append("g")
     .selectAll("path")
     .data(map)
