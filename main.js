@@ -18,7 +18,7 @@ var svg = d3.select("div#map").append("svg")
             .attr('preserveAspectRatio', 'xMinYMid');
 
 var projection = d3.geoAlbers()
-    .rotate([71.117,0])
+    .rotate([71.118,0])
     .center([0, 42.4067])
     .scale(5700000)
     .translate([width / 2, height / 2]);
