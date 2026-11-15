@@ -31,7 +31,7 @@ fiscal years differ by city:
 | Somerville | 2013, 2019, 2020, 2021, 2023, 2024, 2025   |
 
 The map has a year selector. When a city has no data for the chosen year,
-it shows that city's closest earlier vintage and says so on the map.
+it shows that city's closest earlier vintage.
 
 Note: `data/2018/` actually contains FY2012 (Medford) and FY2013 (Somerville)
 data, the same vintages as `data/2012/` and `data/2013/`.

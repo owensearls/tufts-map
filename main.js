@@ -43,7 +43,6 @@ select.selectAll("option")
     .enter().append("option")
       .attr("value", d => d)
       .text(d => "FY" + d);
-var note = controls.append("div").style("font-size", "12px");
 
 var svg = d3.select("div#map").append("svg")
             .attr("width", "100%")
@@ -62,15 +61,27 @@ var path = d3.geoPath()
 
 var layer = svg.append("g");
 
+var cache = {};
+function fetchCity(city, year) {
+  var url = `data/${vintageFor(city, year)}/tufts-${city}.json`;
+  if (!cache[url]) {
+    cache[url] = d3.json(url).catch(function (err) {
+      delete cache[url];
+      throw err;
+    });
+  }
+  return cache[url];
+}
+
+var latest = 0;
 function load(year) {
-  var cities = ["medford", "somerville"];
-  var used = cities.map(c => vintageFor(c, year));
-  note.text(cities
-    .map((c, i) => used[i] != year ? `${c[0].toUpperCase() + c.slice(1)}: FY${used[i]} data` : null)
-    .filter(x => x)
-    .join(", "));
-  Promise.all(cities.map((c, i) => d3.json(`data/${used[i]}/tufts-${c}.json`)))
-    .then(render);
+  var request = ++latest;
+  Promise.all(["medford", "somerville"].map(c => fetchCity(c, year)))
+    .then(function (data) {
+      // Ignore responses for a year the user has already moved past.
+      if (request == latest) render(data);
+    })
+    .catch(console.error);
 }
 
 function render(data) {
