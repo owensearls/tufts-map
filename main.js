@@ -1,7 +1,7 @@
 function color(owner) {
   if (/TUFTS/i.test(owner)) {
     return "#417dc1"
-  } else if (/WALNUT/i.test(owner)) {
+  } else if (/WALNUT HILL/i.test(owner)) {
     return "#F03A47"
   } else {
     return "none"
